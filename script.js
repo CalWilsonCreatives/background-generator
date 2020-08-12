@@ -6,10 +6,10 @@ var button = document.querySelector("button");
 
 
 
-// function random_rgba() {
-//     var o = Math.round, r = Math.random, s = 255;
-//     return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
-// }
+function random_rgba() {
+    var o = Math.round, r = Math.random, s = 255;
+    return 'rgba(' + o(r()*s) + ',' + o(r()*s) + ',' + o(r()*s) + ',' + r().toFixed(1) + ')';
+}
 
 function getRandomRgb() {
   var num = Math.round(0xffffff * Math.random());
@@ -32,16 +32,32 @@ function changecolour () {
 	
 }
 
-function randomise () {
+function randomize () {
 
-var randomColour1 = getRandomRgb();
-var randomColour2 = getRandomRgb();
-body.style.background = button.style.backgroundImage
-css.textContent = body.style.background + ";";
+if(body.style.background !== button.style.backgroundImage) {
+	body.style.background = button.style.backgroundImage;
+	css.textContent = body.style.background + ";";
+}
+
+else {
+	var randomColour1 = random_rgba();
+	var randomColour2 = random_rgba();
+
+	body.style.background = "linear-gradient(to right, " +
+	randomColour1
+	+" , "
+	+ randomColour2
+	+" )";
+
+	css.textContent = body.style.background + ";";
+	button.style.backgroundImage = body.style.background;
+}
+
+
 
 }
 
-function bgf () {
+function buttonbackgroundrandomizer () {
 
 	var randomColour1 = getRandomRgb();
 	var randomColour2 = getRandomRgb();
@@ -59,6 +75,6 @@ colour1.addEventListener("input" , changecolour);
 
 colour2.addEventListener("input" , changecolour);
 
-button.addEventListener("click", randomise);
+button.addEventListener("click", randomize);
 
-button.addEventListener("mouseenter", bgf);
+button.addEventListener("mouseenter", buttonbackgroundrandomizer);
